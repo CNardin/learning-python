@@ -1,6 +1,7 @@
 # Challenge DATASET  -  PERSONAGGI STORICI 
 import os
 import csv
+import pdb
 
 from typing import List # to enlist content directory
 
@@ -12,6 +13,8 @@ filename = 'personaggi-storici-trentino.csv'
 
 path_file = os.sep.join([path_dir, filename])
 print(path_file)
+print("-" * 45)
+
 
 # Dictionaries
 map_unknown = {
@@ -70,6 +73,7 @@ with open(path_file,encoding='latin-1') as f_lettura:
     intestazione = [nome.lower(),  luogo_nascita.lower(),data_nascita.lower(), 'secolo']
     scrittore = csv.writer(f_scrittura, delimiter=',')    
     scrittore.writerow(intestazione)
+    print("-" * 45)
 
     for riga in f_lettura:     
       
@@ -91,64 +95,48 @@ with open(path_file,encoding='latin-1') as f_lettura:
           
       # Fixed 'Secolo'
       print("Conversione:")  
-      isecolo = ""
+      isecolo = idata.replace('/',' ')
 
-      if 'secolo' in idata:
-        temp = ""
-        for el in idata:
-          if el in ['X','I','V',' ']:
-            temp += el
+      data_split = isecolo.split()    #temp = idata.translate(None,not "123456789 ")
+      # data_split = ['s1','s2','s3','s4']
+      print(data_split)
+      for iword in reversed(data_split):
+        # iword = s1 --> s2 --> ...
+        iword2check = ""
+        for ichar in iword:
+        # ichar = i-character di iword
+          if ichar in "0123456789 X I V":
+          # costruisci variabile numerica secolo
+            iword2check += ichar
+        if iword2check != '':
+          print("Anno/Secolo da gestire:",iword2check)
 
-        temp2 = temp.split()
-        temp = temp2[-1]
-
-        if temp in secoli:
-          isecolo = secoli[temp]
-      
-      elif idata != '':
-        print((idata))
-        data_split = idata.split()    #temp = idata.translate(None,not "123456789 ")
-        # data_split = ['s1','s2','s3','s4']
-        print(data_split)
-        for iword in reversed(data_split):
-          # iword = s1 --> s2 --> ...
-          iword2check = ""
-          for ichar in iword:
-            # ichar = i-character di iword
-            if ichar in "0123456789 ":
-            # costruisci variabile numerica secolo
-              iword2check += ichar
-          print(iword2check)
-          try:  
-            temp = int(iword2check)
-            if (isinstance(temp, int)):
-              isecolo = temp
-              print("Stampa ultimo intero: ", isecolo)
+        try: 
+          if iword2check in secoli:
+            #print("dentro dizionario",iword2check)
+            isecolo = secoli.get(iword2check)
+            #print("convertito",isecolo)
+            if isecolo != '':
+              print("Secolo identificato: ", isecolo)
             break
-          except ValueError:
-            print("Riprova: ", iword)
+        except Exception:
+          print("KKK: non ho trovato il secolo da convertire!")     
 
+        try:  
+          temp = int(iword2check) 
+          if (isinstance(temp, int)):
+            temp -= temp % +100
+            isecolo = temp
+          if isecolo != '':
+            print("Secolo identificato: ", isecolo)
+          break
+        except ValueError:
+          print(isecolo)
+          pass #print("Riprova: ", iword)      
 
-#        for iel in range(len(temp),0):
-#          int(temp)
-#        isecolo = temp[-1]
-#      print(isecolo)
-      
-
+      print("-" * 55)
+  
       i_stampa = [inome,iluogo,idata,isecolo]
 
       scrittore.writerow(i_stampa)     
      # print(i_stampa)
-
-
-
-
-
-
-#  print(next(lettore))
-#  print(type(lettore))
-
-
-#  print(nome)
-#  with open()
-#  print()
