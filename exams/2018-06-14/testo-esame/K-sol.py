@@ -98,32 +98,32 @@ deve dare:
 """
 
 
-def dilist(n):
-# # scrivi qui
-	diz = dict()
-	for voce in range(1,n+1):
-		diz[voce] = list(range(1,voce+1))
-#		print("incremento diz;" , diz)
+# def dilist(n):
+# # # scrivi qui
+# 	diz = dict()
+# 	for voce in range(1,n+1):
+# 		diz[voce] = list(range(1,voce+1))
+# #		print("incremento diz;" , diz)
 		
-	print("Diz.: ", diz)
-	print("-"*25)
-	return diz 
+# 	print("Diz.: ", diz)
+# 	print("-"*25)
+# 	return diz 
 
-#INIZIO TEST - NON TOCCARE !
-assert dilist(0) == dict()
-assert dilist(1) == {
-1:[1]
-}
-assert dilist(2) == {
-1:[1],
-2:[1,2]
-}
-assert dilist(3) == {
-1:[1],
-2:[1,2],
-3:[1,2,3]
-}
-# FINE TEST
+# #INIZIO TEST - NON TOCCARE !
+# assert dilist(0) == dict()
+# assert dilist(1) == {
+# 1:[1]
+# }
+# assert dilist(2) == {
+# 1:[1],
+# 2:[1,2]
+# }
+# assert dilist(3) == {
+# 1:[1],
+# 2:[1,2],
+# 3:[1,2,3]
+# }
+# # FINE TEST
 
 # -----------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------
