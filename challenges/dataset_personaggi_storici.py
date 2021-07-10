@@ -105,18 +105,18 @@ with open(path_file,encoding='latin-1') as f_lettura:
         iword2check = ""
         for ichar in iword:
         # ichar = i-character di iword
-          if ichar in "0123456789 X I V":
+          if ichar in "0123456789XIV ":
           # costruisci variabile numerica secolo
             iword2check += ichar
-        if iword2check != '':
-          print("Anno/Secolo da gestire:",iword2check)
+        if iword2check != '':                            
+          print("Anno/Secolo da gestire:",iword2check)   # L'indentaone da qui in già è giusta?
 
-        try: 
+        try:                                             # questo try chiude l'IF di prima... rendendolo banale (ha solo una print dentro)
           if iword2check in secoli:
             #print("dentro dizionario",iword2check)
-            isecolo = secoli.get(iword2check)
             #print("convertito",isecolo)
-            if isecolo != '':
+            if secoli.get(iword2check) != '':            # Tendenzialmente assegnare e utilizzare subito quello che tiri fuori da un dizionario può portare a problematiche a valle
+              isecolo = secoli.get(iword2check)          # quindi prima fai il check poi assegni di solito
               print("Secolo identificato: ", isecolo)
             break
         except Exception:
@@ -124,7 +124,7 @@ with open(path_file,encoding='latin-1') as f_lettura:
 
         try:  
           temp = int(iword2check) 
-          if (isinstance(temp, int)):
+          if (isinstance(temp, int)):    #Questo If non serve, perchè se temp non è un intero la 126 tira eccezzione e si salta alla 133
             temp -= temp % +100
             isecolo = temp
           if isecolo != '':
